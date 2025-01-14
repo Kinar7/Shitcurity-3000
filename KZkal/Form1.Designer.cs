@@ -157,7 +157,7 @@
             Relapse.Name = "Relapse";
             Relapse.Size = new Size(157, 50);
             Relapse.TabIndex = 10;
-            Relapse.Text = "Рецедевив\r\n+15%\r\n\r\n";
+            Relapse.Text = "Рецидив\r\n+15%\r\n\r\n";
             Relapse.UseVisualStyleBackColor = true;
             Relapse.Click += Relapse_Click;
             // 
