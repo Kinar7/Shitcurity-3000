@@ -159,12 +159,6 @@ namespace KZkal
             double modification = totalMinutes * (percent / 100);
             totalMinutes += modification;
 
-            double maxAllowedTime = punishmentTimes.Max() * 1.5;
-            if (totalMinutes > maxAllowedTime)
-            {
-                totalMinutes = maxAllowedTime;
-            }
-
             int fullMinutes = (int)totalMinutes;
             double fractionalMinutes = totalMinutes - fullMinutes;
 
