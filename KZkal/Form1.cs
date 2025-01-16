@@ -75,7 +75,7 @@ namespace KZkal
             punishmentTimes.Add(isMaxPunishment ? maxTime : minTime);
         }
 
-        private void TriggerResultUpdate()
+        public void TriggerResultUpdate()
         {
             if (Result.Text == "PERMA")
                 return;
@@ -109,34 +109,7 @@ namespace KZkal
 
         private double currentTime = 0;
 
-        private void Relapse_Click(object sender, EventArgs e)
-        {
-            if (Result.Text == "PERMA" || punishmentTimes.Count == 0)
-                return;
-
-            double totalMinutes = punishmentTimes.Sum(x => (double)x);
-            double maxAllowedTime = punishmentTimes.Max() * 1.5;
-
-            if (totalMinutes > maxAllowedTime)
-            {
-                totalMinutes = maxAllowedTime;
-            }
-
-            if (currentTime == 0)
-            {
-                currentTime = totalMinutes;
-            }
-
-            currentTime *= 1.15;
-
-            int fullMinutes = (int)currentTime;
-            double fractionalMinutes = currentTime - fullMinutes;
-
-            int seconds = (int)(fractionalMinutes * 60);
-
-            string formattedTime = string.Format("{0:D2}:{1:D2}", fullMinutes, seconds);
-            Result.Text = formattedTime;
-        }
+        
 
         private void Reset_Click(object sender, EventArgs e)
         {
@@ -145,27 +118,42 @@ namespace KZkal
             KZMax.Checked = false;
             minTime = 0;
             maxTime = 0;
+            currentMaxAllowedTime = 0;
+
+
         }
+        private double currentMaxAllowedTime = 0;
+
 
         private void ModifyTotalTime(double percent)
         {
             if (Result.Text == "PERMA")
                 return;
 
-            double totalMinutes = punishmentTimes.Sum(x => (double)x);
-            if (totalMinutes == 0)
+            if (punishmentTimes.Count == 0)
                 return;
 
-            double modification = totalMinutes * (percent / 100);
-            totalMinutes += modification;
+            if (currentMaxAllowedTime == 0)
+            {
+                currentMaxAllowedTime = punishmentTimes.Max() * 1.5;
+            }
 
-            int fullMinutes = (int)totalMinutes;
-            double fractionalMinutes = totalMinutes - fullMinutes;
+            double modification = currentMaxAllowedTime * (percent / 100);
+            currentMaxAllowedTime += modification;
+
+            int fullMinutes = (int)currentMaxAllowedTime;
+            double fractionalMinutes = currentMaxAllowedTime - fullMinutes;
 
             int seconds = (int)(fractionalMinutes * 60);
 
             string formattedTime = string.Format("{0:D2}:{1:D2}", fullMinutes, seconds);
             Result.Text = formattedTime;
+        }
+
+
+        private void Relapse_Click(object sender, EventArgs e)
+        {
+            ModifyTotalTime(15);
         }
 
         private void Add5_Click(object sender, EventArgs e)

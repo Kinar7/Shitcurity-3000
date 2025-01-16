@@ -155,7 +155,7 @@
             Relapse.Font = new Font("Segoe UI", 10F);
             Relapse.Location = new Point(12, 142);
             Relapse.Name = "Relapse";
-            Relapse.Size = new Size(157, 50);
+            Relapse.Size = new Size(144, 50);
             Relapse.TabIndex = 10;
             Relapse.Text = "Рецидив\r\n+15%\r\n\r\n";
             Relapse.UseVisualStyleBackColor = true;
