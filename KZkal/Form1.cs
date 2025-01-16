@@ -238,6 +238,13 @@ namespace KZkal
         {
             // Kinar_7
         }
-        
+
+
+        protected override void OnDeactivate(EventArgs e)
+        {
+            base.OnDeactivate(e);
+            this.Activate(); 
+        }
+
     }
 }

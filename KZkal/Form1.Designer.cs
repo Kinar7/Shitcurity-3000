@@ -377,6 +377,8 @@
             Controls.Add(xx3);
             Controls.Add(xx2);
             Controls.Add(xx1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Shitcurity - 3000 ";
             Load += Form1_Load;
